@@ -19,6 +19,7 @@ A react component that gets and show youtube videos using voice commands [alya-s
  
 ## Usage 
 First configure [asm-youtube-addon-skill](https://github.com/alya-mirror/asm-youtube-addon-skill) and follow the steps there.Then you can just import it as react component and use it.
+* Note : for using it as a react component in a different project than [alya-smart-mirror](https://github.com/alronz/alya-smart-mirror) you have to create a folder called 'certs' in the main directory and copy the certs you get from [AWSIot](https://github.com/alya-mirror/asm-youtube-addon-skill/blob/master/documentation/awsIOT.md). 
 ```
 npm install asm-youtube-addon --save
 ```

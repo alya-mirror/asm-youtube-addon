@@ -1,6 +1,6 @@
 {
-  "name": "asm-youtube-addon",
-  "version": "0.0.1",
+  "name": "@alya-mirror/asm-youtube-addon",
+  "version": "0.0.2",
   "description": "A react component that gets and show youtube videos using voice commands for alya-smar-mirror",
   "engines": {
     "node": ">=6.0.0"
@@ -16,6 +16,7 @@
     "clean": "nwb clean-module",
     "test": "export TEST=true && react-scripts test --env=jsdom",
     "electron-start": "react-scripts start",
+    "publish": "npm publish --access public",
     "dev": "concurrently \"cross-env BROWSER=none yarn electron-start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "dependencies": {

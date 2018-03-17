@@ -1,9 +1,9 @@
 {
   "awsIoTConfigs": {
-    "keyFileName": "alya-smart-mirror.private.key",
-    "certFileName": "alya-smart-mirror.cert.pem",
+    "keyFileName": "private.key",
+    "certFileName": "cert.pem",
     "caFileName": "root-CA.crt",
-    "clientId": "alya_smart_mirror_module",
+    "clientId": "alya_smart_mirror",
     "region": "us-east-1",
     "host": "ak6hspilv9mrx.iot.us-east-1.amazonaws.com"
   },

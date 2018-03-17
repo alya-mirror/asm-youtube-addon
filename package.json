@@ -1,6 +1,6 @@
 {
   "name": "@alya-mirror/asm-youtube-addon",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A react component that gets and show youtube videos using voice commands for alya-smar-mirror",
   "engines": {
     "node": ">=6.0.0"

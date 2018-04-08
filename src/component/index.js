@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom'
 import config from './config.defaults'
 
 const AWSIoTclient = require('./utils/AWSIoTClient');
-const SEARCH_VIDEO_TOPIC = 'AlyaSmartMirror:youtube_module';
+const SEARCH_VIDEO_TOPIC = 'AlyaSmartMirror';
 const YoutubeSearch = require('youtube-node');
 
 const youtubeSearch = new YoutubeSearch();
@@ -60,7 +60,10 @@ class AlexaYoutube extends Component {
         caller.resumeVideo();
         break;
       case 'close_video':
-        caller.closeVideo()
+        caller.closeVideo();
+        break;
+      default:
+        break;
     }
   }
 

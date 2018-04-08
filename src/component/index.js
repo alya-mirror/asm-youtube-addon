@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import Youtube from 'react-youtube';
 import CoverFlow from 'coverflow-react';
 import ReactTestUtils from 'react-dom/test-utils';
@@ -6,12 +6,7 @@ import ReactDOM from 'react-dom'
 import config from './config.defaults'
 
 const AWSIoTclient = require('./utils/AWSIoTClient');
-<<<<<<< HEAD
 const SEARCH_VIDEO_TOPIC = 'AlyaSmartMirror';
-=======
-const SEARCH_VIDEO_TOPIC = 'AlyaSmartMirror:youtube_module';
-const alyaVoiceCommandsTopic = 'alya-data';
->>>>>>> master
 const YoutubeSearch = require('youtube-node');
 
 const youtubeSearch = new YoutubeSearch();
@@ -31,19 +26,19 @@ class AlexaYoutube extends Component {
     };
     this.awsIotClient = new AWSIoTclient();
     this.awsIotClient.connect(config.awsIoTConfigs)
-      .then(() => {
-        this.awsIotClient.subscribe(SEARCH_VIDEO_TOPIC, {}, this.listenerFunction, this);
-        this.awsIotClient.subscribe(alyaVoiceCommandsTopic, {}, this.listenerFunction, this);
-      });
+    .then(() => {
+      this.awsIotClient.subscribe(SEARCH_VIDEO_TOPIC, {}, this.listenerFunction, this);
+    });
   }
 
   listenerFunction(topic, payload, caller) {
-    if ((topic !== SEARCH_VIDEO_TOPIC) && (topic !== alyaVoiceCommandsTopic)) {
+    if (topic !== SEARCH_VIDEO_TOPIC) {
       console.log('different topic was sent');
       return;
     }
-    let message = JSON.parse(payload.toString());
+    let message = payload.toString();
     console.log('message', topic, message);
+    message = JSON.parse(message);
     let skill = message.skill;
     switch (skill) {
       case 'search_video':
@@ -69,29 +64,6 @@ class AlexaYoutube extends Component {
         break;
       default:
         break;
-    }
-
-    if (payload.type === 'matrix-voice-command') {
-      let data = message.data;
-      switch (data) {
-        case 'alya next':
-          caller.goNext();
-          break;
-        case 'alya previous':
-          caller.goPrevious();
-          break;
-        case 'alya select video':
-          caller.showVideo();
-          break;
-        case 'alya pause video':
-          caller.pauseVideo();
-          break;
-        case 'alya resume video':
-          caller.resumeVideo();
-          break;
-        case 'alya close video':
-          caller.closeVideo()
-      }
     }
   }
 

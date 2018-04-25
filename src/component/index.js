@@ -4,6 +4,7 @@ import CoverFlow from 'coverflow-react';
 import ReactTestUtils from 'react-dom/test-utils';
 import ReactDOM from 'react-dom'
 import config from './config.defaults'
+import io from 'socket.io-client';
 
 const AWSIoTclient = require('./utils/AWSIoTClient');
 const SEARCH_VIDEO_TOPIC = 'AlyaSmartMirror';
@@ -20,10 +21,37 @@ let currentIndex = 0;
 class AlexaYoutube extends Component {
   constructor(props) {
     super(props);
+    let self = this;
     this.state = {
       videoHidden: true,
       sliderHidden: true,
+      settings: {
+        width: '640',
+        height: '390',
+        autoplay:1
+      }
     };
+    this.socket = io('http://localhost:3100');
+    this.socket.on('connect', function () {
+      console.log('connected');
+    });
+    this.socket.on('disconnect', function () {
+      console.log('disconnected');
+    });
+    this.socket.on('@alya-mirror/asm-youtube-addon', function (data) {
+      const message = JSON.parse(data).data.addonSettings;
+      let isAuto = 1;
+      if(!message.autoPlay){
+        isAuto = 0;
+      }
+      self.setState({
+        settings: {
+          width: message.width,
+          theme : message.height,
+          autoplay:isAuto
+        }
+      });
+    });
     this.awsIotClient = new AWSIoTclient();
     this.awsIotClient.connect(config.awsIoTConfigs)
     .then(() => {
@@ -117,7 +145,6 @@ class AlexaYoutube extends Component {
       });
       currentIndex++;
       currentVideoID = videos[currentIndex].id.videoId;
-      var ali = '';
     }
 
   }
@@ -164,10 +191,10 @@ class AlexaYoutube extends Component {
     }
     else if (!this.state.videoHidden) {
       const opts = {
-        height: '390',
-        width: '640',
+        height: this.state.settings.height,
+        width: this.state.settings.width,
         playerVars: {
-          autoplay: 1
+          autoplay: this.state.settings.autoplay
         }
       };
       internalElement = <Youtube

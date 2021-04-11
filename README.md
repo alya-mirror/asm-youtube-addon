@@ -4,8 +4,8 @@
 [![npm package][npm-badge]][npm]
 [![Coveralls][coveralls-badge]][coveralls]
 
-A react component that gets and show youtube videos using voice commands . 
-It was created as an Addon for [alya-smart-mirror](https://github.com/alronz/alya-smart-mirror) for showing youtube videos and play the chosen video in the mirror .
+A react component that gets and show youtube videos using voice commands. 
+It was created as an Addon for [alya-smart-mirror](https://github.com/alronz/alya-smart-mirror) for showing youtube videos and play the chosen video in the mirror.
 
 [build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
 [build]: https://travis-ci.org/user/repo
